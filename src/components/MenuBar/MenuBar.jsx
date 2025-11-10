@@ -1,6 +1,7 @@
 import React from 'react'
 import logo from '../../assets/logo.jpg';
 import cart from '../../assets/cart.png'
+import { Link } from 'react-router-dom';
 const MenuBar = () => {
     return (
         <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -12,14 +13,14 @@ const MenuBar = () => {
                 <div className="collapse navbar-collapse mx-3" id="navbarSupportedContent">
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                         <li className="nav-item">
-                            <a className="nav-link active" aria-current="page" href="#">Home</a>
+                            <Link className="nav-link active" aria-current="page" to="/">Home</Link>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">Explore</a>
+                            <Link className="nav-link" to="/explore">Explore</Link>
                         </li>
 
                         <li className="nav-item">
-                            <a className="nav-link" href='#'>Contact Us</a>
+                            <Link className="nav-link" to='/contactUs'>Contact Us</Link>
                         </li>
                     </ul>
 
