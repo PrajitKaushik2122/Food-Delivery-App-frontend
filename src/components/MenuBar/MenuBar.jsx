@@ -9,7 +9,9 @@ const MenuBar = () => {
             <div className="container">
                 {/* Logo + Title */}
                 <div className="d-flex align-items-center">
+                    <Link to="/">
                     <img src={logo} alt="Logo" height={65} width={75} className="me-2" />
+                    </Link>
                     <h4
                         className="m-0"
                         style={{
@@ -40,12 +42,12 @@ const MenuBar = () => {
                     </ul>
 
                     <div className="menubar-right d-flex align-items-center gap-3">
-                        <div className="position-relative">
+                        <Link to='/Cart' className="position-relative">
                             <img src={cart} width={40} height={40} alt="Cart" />
                             <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning">
                                 5
                             </span>
-                        </div>
+                        </Link>
                         <button type="button" className="btn btn-danger ms-4">Log In</button>
                         <button type="button" className="btn btn-outline-danger">Register</button>
                     </div>
