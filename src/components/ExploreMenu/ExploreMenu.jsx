@@ -2,7 +2,7 @@ import React from 'react'
 import { categories } from '../../assets/assets'
 import './ExploreMenu.css'
 import { useRef } from 'react'
-const ExploreMenu = () => {
+const ExploreMenu = ({category,setCategory}) => {
 
     const menuRef = useRef(null);
 
@@ -32,7 +32,9 @@ const ExploreMenu = () => {
                 {
                     categories.map((item, index) => {
                         return (
-                            <div key={index} className="text-center explore-menu-list-item">
+                            <div key={index} className={`text-center explore-menu-list-item ${
+        item.category === category ? 'active-underline' : ''
+      }`} onClick={()=>setCategory(prev=> prev==item.category?'All':item.category)}>
                                 <img src={item.icon} alt="" className="rounded-cricle" height={120} width={170} />
                                 <p className="mt-2 fw-bold">{item.category}</p>
                             </div>

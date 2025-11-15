@@ -37,3 +37,12 @@
     background-color: #c4c2c2;
     border: none;
 }
+
+.explore-menu-list-item {
+  padding-bottom: 10px;
+}
+
+.active-underline {
+  border-bottom: 3px solid tomato; 
+  border-radius: 2px;
+}
