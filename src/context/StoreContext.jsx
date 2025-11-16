@@ -13,6 +13,9 @@ export const StoreContextProvider = (props) =>{
     const decreaseqty = (foodId) =>{
         setQuantities((prev)=>({...prev,[foodId]:prev[foodId]>0?prev[foodId]-1:0}));
     }
+    const removeItem = (id) => {
+    setQuantities(prev => ({ ...prev, [id]: 0 }));
+};
     const fetchFoodList = async ()=>{
         try {
             const response = await fetch('http://localhost:8080/api/dishes/getAll');
@@ -27,7 +30,8 @@ export const StoreContextProvider = (props) =>{
         foodList,
         increaseqty,
         decreaseqty,
-        quantities
+        quantities,
+        removeItem
     }; 
 
     useEffect(()=>{

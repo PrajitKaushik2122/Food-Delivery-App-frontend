@@ -1,0 +1,22 @@
+.list-group-item {
+  border: 0;
+  border-bottom: 1px solid #eee;
+}
+
+.list-group {
+  border-radius: 0.75rem;
+}
+
+form label {
+  font-weight: 500;
+}
+
+.btn-danger {
+  border-radius: 8px;
+  padding: 10px;
+}
+
+input.form-control,
+select.form-select {
+  border-radius: 8px;
+}
