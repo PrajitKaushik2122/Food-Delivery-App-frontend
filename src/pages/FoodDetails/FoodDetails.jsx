@@ -1,11 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { StoreContext } from '../../context/StoreContext';
 
 const FoodDetails = () => {
   const { id } = useParams();
   const [data, setData] = useState({});
-
+  const {increaseqty} = useContext(StoreContext);
+  const navigate = useNavigate();
+  const addToCart =()=>{
+    increaseqty(data.id);
+    navigate('/Cart');
+  }
   const fetchDetails = async (id) => {
     try {
       const response = await fetch('http://localhost:8080/api/dishes/get', {
@@ -69,21 +75,10 @@ const FoodDetails = () => {
             </p>
 
             <div className="d-flex align-items-center gap-3">
-              <input
-                className="form-control text-center"
-                id="inputQuantity"
-                type="number"
-                defaultValue="1"
-                min="1"
-                style={{
-                  width: "70px",
-                  borderRadius: "12px",
-                  border: "1px solid #ccc"
-                }}
-              />
               <button
                 className="btn btn-outline-dark px-4 py-2 rounded-3 shadow-sm"
                 type="button"
+                onClick={addToCart}
               >
                 <i className="bi-cart-fill me-2"></i>
                 Add to cart

@@ -1,15 +1,17 @@
 import React, { useContext } from 'react';
 import logo from '../../assets/logo.jpg';
 import cart from '../../assets/cart.png';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { StoreContext } from '../../context/StoreContext';
 
 const MenuBar = () => {
-    const { quantities } = useContext(StoreContext);
+    const navigate = useNavigate();
+    const { quantities, token } = useContext(StoreContext);
     const uniqueItems = Object.values(quantities).filter(qty => qty > 0).length;
 
     const location = useLocation();   // <-- get current route
     const currentPath = location.pathname;
+
 
     return (
         <nav className="navbar navbar-expand-lg bg-body-tertiary shadow-sm">
@@ -72,16 +74,58 @@ const MenuBar = () => {
                         </li>
                     </ul>
 
-                    <div className="menubar-right d-flex align-items-center gap-3">
-                        <Link to='/Cart' className="position-relative">
-                            <img src={cart} width={40} height={40} alt="Cart" />
-                            <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning">
-                                {uniqueItems}
-                            </span>
+<div className="menubar-right d-flex align-items-center gap-3">
+    {token ? (
+        <>
+            {/* Cart */}
+            <Link to='/Cart' className="position-relative me-3">
+                <img src={cart} width={40} height={40} alt="Cart" />
+                <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning">
+                    {uniqueItems}
+                </span>
+            </Link>
+
+            {/* Profile Dropdown */}
+            <div className="dropdown">
+                <img
+                    src="https://i.pravatar.cc/40?img=12"   // random avatar
+                    alt="profile"
+                    className="rounded-circle"
+                    width={40}
+                    height={40}
+                    role="button"
+                    data-bs-toggle="dropdown"
+                />
+
+                <ul className="dropdown-menu dropdown-menu-end shadow">
+                    <li>
+                        <Link className="dropdown-item" to="/cart">
+                            My Orders
                         </Link>
-                        <button type="button" className="btn btn-danger ms-4">Log In</button>
-                        <button type="button" className="btn btn-outline-danger">Register</button>
-                    </div>
+                    </li>
+                    <li><hr className="dropdown-divider" /></li>
+                    <li>
+                        <button
+                            className="dropdown-item text-danger"
+                            onClick={() => {
+                                localStorage.removeItem("token");
+                                window.location.reload();
+                            }}
+                        >
+                            Logout
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </>
+    ) : (
+        <>
+            <button type="button" className="btn btn-danger ms-4" onClick={() => navigate('/login')}>Log In</button>
+            <button type="button" className="btn btn-outline-danger" onClick={() => navigate('/register')}>Register</button>
+        </>
+    )}
+</div>
+
                 </div>
             </div>
         </nav>
