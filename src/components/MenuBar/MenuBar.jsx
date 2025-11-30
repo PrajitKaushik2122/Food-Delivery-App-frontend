@@ -99,7 +99,7 @@ const MenuBar = () => {
 
                 <ul className="dropdown-menu dropdown-menu-end shadow">
                     <li>
-                        <Link className="dropdown-item" to="/cart">
+                        <Link className="dropdown-item" to="/myorders">
                             My Orders
                         </Link>
                     </li>

@@ -51,20 +51,6 @@ export const StoreContextProvider = (props) => {
     }
     const removeItem = async (id) => {
         setQuantities(prev => ({ ...prev, [id]: 0 }));
-        // try {
-        //     const response = await fetch("http://localhost:8080/api/cart/clear", {
-        //         method: "Delete",
-        //         headers: {
-        //             "Content-Type": "application/json",
-        //             "Authorization": `Bearer ${token}` 
-        //         },
-        //     })
-        //     if (response.status != 204) {
-        //         toast.error("error while clearing the cart");
-        //     }
-        // } catch (error) {
-        //     toast.error("error while clearing the cart");
-        // }
     };
     const fetchFoodList = async () => {
         try {
@@ -95,7 +81,8 @@ export const StoreContextProvider = (props) => {
         quantities,
         removeItem,
         token,
-        setToken
+        setToken,
+        setQuantities
     };
 
     useEffect(() => {
