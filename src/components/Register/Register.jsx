@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import './Register.css'
 import { toast } from 'react-toastify'
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
 const Register = () => {
 
   const navigate = useNavigate();
@@ -23,7 +25,7 @@ const Register = () => {
   const onSubmitHandler = async (event)=>{
     event.preventDefault();
     try {
-      const response = await fetch('http://localhost:8080/api/user/register',{
+      const response = await fetch(`${BASE_URL}/api/user/register`,{
         method: 'Post',
         headers:{
           'Content-Type': 'application/json'

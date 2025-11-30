@@ -4,6 +4,8 @@ import { useContext } from "react";
 import { StoreContext } from "../../context/StoreContext";
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+const RAZORPAY_KEY = import.meta.env.VITE_RAZORPAY_KEY;
 
 // Refactored PlaceOrder component
 export default function PlaceOrder() {
@@ -83,7 +85,7 @@ export default function PlaceOrder() {
     };
 
     try {
-      const response = await fetch('http://localhost:8080/api/orders/create', {
+      const response = await fetch(`${BASE_URL}/api/orders/create`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -120,7 +122,7 @@ export default function PlaceOrder() {
 
   const initiatePayment = async (order) => {
     const options = {
-      key: "rzp_test_Rj9eOeBiJTyZjr",
+      key: RAZORPAY_KEY,
       amount: Math.round(order.amount * 100),
       currency: "INR",
       name: "Food Land",
@@ -157,7 +159,7 @@ export default function PlaceOrder() {
     };
 
     try {
-      const response = await fetch("http://localhost:8080/api/orders/verify", {
+      const response = await fetch(`${BASE_URL}/api/orders/verify`, {
         method: "POST",
         headers: {
           'Content-Type': 'application/json',
@@ -171,7 +173,7 @@ export default function PlaceOrder() {
         // clear client-side cart
 
         try {
-          const clearCartRes = await fetch("http://localhost:8080/api/cart/clear", {
+          const clearCartRes = await fetch(`${BASE_URL}/api/cart/clear`, {
             method: "DELETE",
             headers: {
               Authorization: `Bearer ${token}`,
@@ -203,7 +205,7 @@ export default function PlaceOrder() {
   const deleteOrder = async (orderId) => {
     if (!orderId) return;
     try {
-      const res = await fetch(`http://localhost:8080/api/orders/delete/${orderId}`, {
+      const res = await fetch(`${BASE_URL}/api/orders/delete/${orderId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

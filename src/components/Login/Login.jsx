@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import './Login.css'
 import { StoreContext } from '../../context/StoreContext'
 import { toast } from 'react-toastify'
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
 const Login = () => {
   const navigate = useNavigate();
@@ -24,7 +25,7 @@ const Login = () => {
     const onSubmitHandler = async (event)=>{
       event.preventDefault();
       try {
-        const response = await fetch('http://localhost:8080/api/user/login',{
+        const response = await fetch(`${BASE_URL}/api/user/login`,{
           method: 'Post',
           headers:{
             'Content-Type': 'application/json'

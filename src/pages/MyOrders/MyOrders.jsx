@@ -2,13 +2,15 @@ import React, { useContext, useState, useEffect } from "react";
 import { StoreContext } from "../../context/StoreContext";
 import logo from "../../assets/logo.jpg";
 import "./MyOrders.css"
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
 const MyOrders = () => {
   const { token } = useContext(StoreContext);
   const [orders, setOrders] = useState([]);
 
   const fetchOrders = async () => {
     try {
-      const response = await fetch("http://localhost:8080/api/orders", {
+      const response = await fetch(`${BASE_URL}/api/orders`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 

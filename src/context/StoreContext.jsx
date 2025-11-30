@@ -1,5 +1,6 @@
 import { createContext, use, useEffect, useState } from "react";
 import { toast } from "react-toastify";
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
 export const StoreContext = createContext(null);
 
@@ -11,7 +12,7 @@ export const StoreContextProvider = (props) => {
     const increaseqty = async (foodId) => {
         setQuantities((prev) => ({ ...prev, [foodId]: (prev[foodId] || 0) + 1 }));
         try {
-            const response = await fetch("http://localhost:8080/api/cart/add", {
+            const response = await fetch(`${BASE_URL}/api/cart/add`, {
                 method: "Post",
                 headers: {
                     "Content-Type": "application/json",
@@ -35,7 +36,7 @@ export const StoreContextProvider = (props) => {
     const decreaseqty = async (foodId) => {
         setQuantities((prev) => ({ ...prev, [foodId]: prev[foodId] > 0 ? prev[foodId] - 1 : 0 }));
         try {
-            const response = await fetch("http://localhost:8080/api/cart/remove", {
+            const response = await fetch(`${BASE_URL}/api/cart/remove`, {
                 method: "Delete",
                 headers: {
                     "Content-Type": "application/json",
@@ -57,7 +58,7 @@ export const StoreContextProvider = (props) => {
     };
     const fetchFoodList = async () => {
         try {
-            const response = await fetch('http://localhost:8080/api/dishes/getAll');
+            const response = await fetch(`${BASE_URL}/api/dishes/getAll`);
             const data = await response.json();
             setFoodList(data);
         } catch (error) {
@@ -66,7 +67,7 @@ export const StoreContextProvider = (props) => {
     }
 
     const loadCartData = async (token)=>{
-        const response = await fetch("http://localhost:8080/api/cart/get", {
+        const response = await fetch(`${BASE_URL}/api/cart/get`, {
                 method: "Get",
                 headers: {
                     "Content-Type": "application/json",

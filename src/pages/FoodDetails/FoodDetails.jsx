@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { StoreContext } from '../../context/StoreContext';
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
 const FoodDetails = () => {
   const { id } = useParams();
@@ -14,7 +15,7 @@ const FoodDetails = () => {
   }
   const fetchDetails = async (id) => {
     try {
-      const response = await fetch('http://localhost:8080/api/dishes/get', {
+      const response = await fetch(`${BASE_URL}/api/dishes/get`, {
         method: 'GET',
         headers: {
           'id': id
