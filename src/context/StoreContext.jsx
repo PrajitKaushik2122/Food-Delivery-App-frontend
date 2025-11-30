@@ -21,7 +21,10 @@ export const StoreContextProvider = (props) => {
                     foodId: foodId
                 })
             })
-            if (response.status != 200) {
+            if (response.status == 403) {
+                toast.error("Please login to continue");
+            }
+            else if(response.status !=200){
                 toast.error("error while updating cart");
             }
         } catch (error) {
