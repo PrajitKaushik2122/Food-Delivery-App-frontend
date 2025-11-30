@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import './placeOrder.css'
+import './PlaceOrder.css'
 import { useContext } from "react";
 import { StoreContext } from "../../context/StoreContext";
 import { useNavigate } from "react-router-dom";
