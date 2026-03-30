@@ -10,6 +10,7 @@ const MyOrders = () => {
 
   const fetchOrders = async () => {
     try {
+      console.log("Fetching orders with token:", token);
       const response = await fetch(`${BASE_URL}/api/orders`, {
         headers: { Authorization: `Bearer ${token}` },
       });
